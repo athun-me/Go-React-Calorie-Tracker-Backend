@@ -18,7 +18,6 @@ var validate = validator.New()
 var entryCollection *mongo.Collection = OpenCollection(Client, "calories")
 
 func AddEntry(c *gin.Context) {
-
 	var ctx, cancel = context.WithTimeout(context.Background(), 100*time.Second)
 	var entry models.Entry
 
@@ -69,7 +68,7 @@ func GetEntries(c *gin.Context) {
 }
 
 func GetEntriesByIngredient(c *gin.Context) {
-	ingredient := c.Params.ByName("ingredient")
+	ingredient := c.Params.ByName("id")
 	var ctx, cancel = context.WithTimeout(context.Background(), 100*time.Second)
 	var entries []bson.M
 	cursor, err := entryCollection.Find(ctx, bson.M{"ingredients": ingredient})
